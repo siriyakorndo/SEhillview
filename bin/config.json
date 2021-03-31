@@ -1,0 +1,46 @@
+// This file is a sample Json file that defines the configuration for a
+// Hillview deployment.  Do not modify this file, make a copy instead.
+
+{
+  // Name of machine hosting the web server
+  "webserver": "web.server.name",
+  // Names of the machines hosting the workers; the web
+  // server machine can also act as a worker
+  "aggregators": [
+    // The "aggregators" level is optional; if it is
+    // missing the configuration should contain just an array of workers
+    {
+      "name": "aggregator1.name",
+      "workers": [
+        "worker1.name",
+        "worker2.name"
+      ]
+    }, {
+      "name": "aggregator2.name",
+      "workers": [
+        "worker3.name",
+        "worker4.name"
+      ]
+    }
+  ],
+  // Network port where the workers listen for requests
+  "worker_port": 3569,
+  // Network port where aggregators listen for requests
+  "aggregator_port": 3570,
+  // Java heap size for Hillview workers
+  "default_heap_size": "25G",
+  // User account for running the Hillview service
+  "user": "hillview",
+  // Folder where the hillview service is installed on remote machines
+  "service_folder": "/home/hillview",
+  // Version of Apache Tomcat to deploy
+  "tomcat_version": "9.0.4",
+  // Tomcat installation folder name
+  "tomcat": "apache-tomcat-9.0.4",
+  // If true delete old log files
+  "cleanup": false,
+  // This can be used to override the default_heap_size for specific machines.
+  "workers_heapsize": {
+    "worker1.name": "25G"
+  }
+}

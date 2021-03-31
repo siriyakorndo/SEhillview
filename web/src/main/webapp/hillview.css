@@ -1,0 +1,502 @@
+/*
+ * Copyright (c) 2017 VMware Inc. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* Always show the scrollbar, to prevent page sizes from being
+   decreased (in width) when more content is added. */
+html {
+    overflow-y: scroll;
+}
+
+/* This is tuned to align the title with the logo. */
+.hillviewTitle > div {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-left: 0;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 1px;
+}
+
+#container {
+    font-family: monospace;
+    overflow: hidden;
+}
+
+.chart:focus, #tableContainer:focus, div.dialog:focus {
+    outline: none;
+}
+
+.chart > h2 {
+    text-align: center;
+    margin: 5px;
+}
+
+h1 {
+    margin: 5px;
+    font-size: 1.6em;
+}
+
+h2 {
+    margin: 5px;
+    font-size: 1.4em;
+}
+
+.console {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+th {
+    border: 1px solid black;
+    margin: 0;
+    font-weight: bold;
+    background: lightgray;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+th {
+    border: 1px solid black;
+    padding: 0;
+}
+
+/* Note: this is not tableView */
+.tabularDisplay td {
+    border: 1px solid black;
+    padding: 0;
+}
+
+.tableView {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.tableView td {
+    padding: 0;
+}
+
+.tableView td.header {
+    background-image: linear-gradient(#f9f9f9,#e4e4e4);
+    border: 1px solid black;
+}
+
+.tableView td.header.selected {
+    background-image: linear-gradient(lightcyan,cyan);
+    border: 1px solid black;
+}
+
+.tableView td.middle {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.tableView td.bottom {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.tableView td.empty {
+    background-color: #f0f0f0;
+}
+
+.tableView td.empty.selected {
+    background-color: lightcyan;
+}
+
+td.all {
+    border: 1px solid black;
+}
+
+.tableView div.meta {
+    background-color: #fafafa;
+}
+
+.tableView td.top {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
+
+/* Used to display divs inside table cells that are truncated when the cells are too narrow */
+.resizable {
+    position: relative;
+}
+
+td:not(.header) > .resizable:hover {
+    position: relative;
+    background: lightyellow;
+}
+
+div.truncated {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.handle {
+    position: absolute;
+    width: 5px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: col-resize;
+}
+
+.missingData {
+    color: red;
+}
+
+.progressBarOuter {
+    margin: 0;
+    padding: 0;
+    background: white;
+    height: 10px;
+    border: solid black 1px;
+    width: 250px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    display: flex;
+}
+
+.external-link {
+    color: blue;
+    text-decoration: underline;
+}
+
+.highlight {
+    background: yellow;
+}
+
+.hillviewPage {
+    border: 2px solid grey;
+    margin: 3px 1px;
+    padding: 0;
+}
+
+.hillviewPage:hover {
+    border: 2px solid red;
+    margin: 3px 1px;
+}
+
+.hillviewPage #hillviewPage0 {
+    border: 0;
+}
+
+.progressLabel {
+    margin: 1px;
+}
+
+.tableView {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    overflow-x: auto;
+}
+
+/* close, minimize, help page elements */
+.close {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.minimize {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.help {
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 0;
+}
+
+.noBorder {
+    border: none;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.progressBarInner {
+    background: green;
+    height: 100%;
+}
+
+.scrollbarOuter {
+    margin: 0;
+    padding: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 15px;
+    height: 100%;
+}
+
+.scrollBarBefore, .scrollBarAfter {
+    background: lightgray;
+    width: 100%;
+}
+
+.dialog {
+    position: fixed;
+    margin: auto;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: auto;
+    height: auto;
+    background: #f1f1f1;
+}
+
+.dialog h1 {
+    text-align: center;
+}
+
+.dialog label{
+    float: left;
+    text-align: left;
+    white-space: nowrap;
+    margin: auto 10px;
+}
+.dialog input, .dialog select {
+    float: right;
+}
+
+.dialog div {
+    overflow: hidden;
+    margin: 5px 5px;
+}
+
+.dialog .confirm {
+    display: inline-block;
+    float: right;
+}
+
+/* Prevent user selection */
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dialog .cancel {
+    display: inline-block;
+    float: left;
+}
+
+.dialog label {
+    font-size:small;
+}
+
+.scrollBarInner {
+    background: darkslategrey;
+    width: 100%;
+}
+
+.histogramBoxLabel {
+    font: 10px sans-serif;
+}
+
+.selected {
+    background: lightcyan;
+}
+
+.dashed {
+    stroke: black;
+    fill: pink;
+    fill-opacity: 0.2;
+    stroke-width: 1px;
+    stroke-dasharray: 5,5
+}
+
+svg.dataRange {
+    height: 10px;
+    display: inline-block;
+}
+
+svg.dataRange > g {
+    transform: scale(100, 10);
+}
+
+textarea:focus, input:focus {
+    outline: none;
+}
+
+table.menu {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    border: 1px solid grey;
+    font-size:small;
+    z-index: 10;
+}
+
+table.menu.topMenu {
+    box-shadow: none;
+}
+
+table.menu td {
+    background-color: rgb(239, 239, 239);
+    color: rgb(0, 0, 0);
+    border: 0;
+    padding: 5px 10px;
+}
+
+table.menu table.menu {
+    position: absolute;
+}
+
+td.menuItem.disabled {
+    color: grey;
+}
+
+td.menuItem.disabled.selected {
+    color: grey;
+}
+
+table.menu td.selected {
+    background-color: rgb(126, 126, 126);
+    color: rgb(255, 255, 255);
+}
+
+table.dropdown {
+    position: fixed;  /* relative to browser window */
+}
+
+.hidden {
+    display: none;
+}
+
+div.colorLegend {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+div.colorLegend > svg {
+    overflow: visible
+}
+
+/* Tabbed browsing */
+.tabs-strip {
+    height: 30px;
+    clear: both;
+}
+
+.tabs-strip .tab input {
+    background-color: grey;
+}
+
+.tabs-strip .tab {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    background-color: grey;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-radius: 3px 3px 0 0;
+    margin-right: 5px;
+}
+
+.tabs-strip .tab.current input {
+    background-color: white;
+}
+
+.tabs-strip .tab.current {
+    position: relative;
+    border-bottom: 1px solid #fff;
+    z-index: 1;
+    background-color: white;
+}
+
+table.tab td {
+    table-layout: fixed;
+    border: 0;
+}
+
+table.tab td:nth-child(1) {
+    width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.dataset {
+    border: 1px solid black;
+}
+
+/* Log file viewer */
+
+table .logHeader td {
+    background: lightgrey;
+    border: 1px solid black;
+    padding: 2px;
+}
+
+.logFileViewer {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.logFileTitle {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.logFileFooter {
+    background: silver;
+}
+
+.logFileContents {
+    flex: 1;
+    overflow: auto;
+}
+
+.logCell {
+    margin-right: 4px;
+    font-family: monospace;
+}

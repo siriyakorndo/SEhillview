@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.hillview.pb";
+option java_outer_classname = "Remoting";
+
+package remoting;
+
+service HillviewServer {
+  rpc map (Command) returns (stream PartialResponse) {}
+  rpc flatMap (Command) returns (stream PartialResponse) {}
+  rpc sketch (Command) returns (stream PartialResponse) {}
+  rpc manage (Command) returns (stream PartialResponse) {}
+  rpc zip (Command) returns (stream PartialResponse) {}
+  rpc unsubscribe (Command) returns (Ack) {}
+  rpc prune (Command) returns (stream PartialResponse) {}
+}
+
+message Command
+{
+  int32 idsIndex = 1;
+  int64 highId = 2;
+  int64 lowId = 3;
+  bytes serializedOp = 4;
+}
+
+message PartialResponse
+{
+  bytes serializedOp = 1;
+}
+
+message Ack
+{
+}
